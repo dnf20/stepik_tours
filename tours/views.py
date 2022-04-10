@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.http import Http404, HttpResponseNotFound, HttpResponseServerError
 from django.shortcuts import render
 
 
@@ -60,3 +60,11 @@ def initialize_departures():
         {"code": "ekb", "name": "Из Екатеринбурга"},
         {"code": "kzn", "name": "Из Казани"},
     ]
+
+
+def custom_handler404(request, exception):
+    return HttpResponseNotFound('Ресурс не найден!')
+
+
+def custom_handler500(request):
+    return HttpResponseServerError('Ошибка сервера!')
